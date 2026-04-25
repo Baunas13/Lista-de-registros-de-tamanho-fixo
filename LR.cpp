@@ -115,8 +115,7 @@ dados remove(celula *l, int chave)
             }
             else
             {
-                int novoFirst = l[p].lista.next;
-                l[novoFirst].lista.prev = -1;
+                l[l[p].lista.next].lista.prev = -1;
             }
         }
 
@@ -129,6 +128,8 @@ dados remove(celula *l, int chave)
 
         else // item removido é o ultimo da lista
         {
+            l[0].cabecalho.last = l[p].lista.prev;
+            l[l[p].lista.prev].lista.next = -1;
         }
     }
 
