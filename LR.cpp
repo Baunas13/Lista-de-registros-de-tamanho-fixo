@@ -101,11 +101,13 @@ dados remove(celula *l, int chave)
 
     for (; p != -1; p = l[p].lista.next)
     {
+
+        l[0].cabecalho.quant--;
+        l[0].cabecalho.first = l[p].lista.next;
+
         if (l[p].lista.prev == -1) // verifica se o item removido é o primeiro da lista
         {
             dadoRemovido = l[p].lista.reg;
-            l[0].cabecalho.quant--;
-            l[0].cabecalho.first = l[p].lista.next;
 
             if (l[p].lista.next == -1) // verifica se alista possui apenas 1 item
             {
@@ -120,6 +122,9 @@ dados remove(celula *l, int chave)
 
         else if (l[p].lista.next != -1) // verifica se o item removido está no meio da lista
         {
+
+            l[l[p].lista.prev].lista.next = l[p].lista.next;
+            l[l[p].lista.next].lista.prev = l[p].lista.prev;
         }
 
         else // item removido é o ultimo da lista
