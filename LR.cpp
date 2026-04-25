@@ -102,45 +102,53 @@ dados remove(celula *l, int chave)
     for (; p != -1; p = l[p].lista.next)
     {
 
-        l[0].cabecalho.quant--;
-        l[0].cabecalho.first = l[p].lista.next;
-
-        if (l[p].lista.prev == -1) // verifica se o item removido é o primeiro da lista
+        if (chave == l[p].lista.reg.chave) // confirma o dado localizado
         {
+
             dadoRemovido = l[p].lista.reg;
+            l[0].cabecalho.quant--;
 
-            if (l[p].lista.next == -1) // verifica se alista possui apenas 1 item
+            if (l[p].lista.prev == -1) // verifica se o item removido é o primeiro da lista
             {
-                l[0].cabecalho.first = -1;
+                l[0].cabecalho.first = l[p].lista.next;
+
+                if (l[p].lista.next == -1) // verifica se alista possui apenas 1 item
+                {
+                    l[0].cabecalho.last = -1;
+                }
+                else
+                {
+                    l[l[p].lista.next].lista.prev = -1;
+                }
             }
-            else
+
+            else if (l[p].lista.next != -1) // verifica se o item removido está no meio da lista
             {
-                l[l[p].lista.next].lista.prev = -1;
+
+                l[l[p].lista.prev].lista.next = l[p].lista.next;
+                l[l[p].lista.next].lista.prev = l[p].lista.prev;
             }
+
+            else // item removido é o ultimo da lista
+            {
+                l[0].cabecalho.last = l[p].lista.prev;
+                l[l[p].lista.prev].lista.next = -1;
+            }
+
+            // Correção do free e retorando dado removido
+
+            l[p].lista.next = l[0].cabecalho.free;
+            l[0].cabecalho.free = p;
+
+            return dadoRemovido;
         }
-
-        else if (l[p].lista.next != -1) // verifica se o item removido está no meio da lista
-        {
-
-            l[l[p].lista.prev].lista.next = l[p].lista.next;
-            l[l[p].lista.next].lista.prev = l[p].lista.prev;
-        }
-
-        else // item removido é o ultimo da lista
-        {
-            l[0].cabecalho.last = l[p].lista.prev;
-            l[l[p].lista.prev].lista.next = -1;
-        }
-
-        // Correção do free e retorando dado removido
-
-        l[p].lista.next = l[0].cabecalho.free;
-        l[0].cabecalho.free = p;
-
-        return dadoRemovido;
     }
 
     cout << "Chave não encontrada!";
+
+    dados dadoVazio;
+    dadoVazio.chave = -1;
+    return dadoVazio;
 }
 
 void imprimeRegistros(celula *l)
