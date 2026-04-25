@@ -95,7 +95,39 @@ void insere(celula *l, dados d)
 
 dados remove(celula *l, int chave)
 {
-    //[FAZER]
+
+    int p = l[0].cabecalho.first;
+    dados dadoRemovido;
+
+    for (; p != -1; p = l[p].lista.next)
+    {
+        if (l[p].lista.prev == -1) // verifica se o item removido é o primeiro da lista
+        {
+            dadoRemovido = l[p].lista.reg;
+            l[0].cabecalho.quant--;
+            l[0].cabecalho.first = l[p].lista.next;
+
+            if (l[p].lista.next == -1) // verifica se alista possui apenas 1 item
+            {
+                l[0].cabecalho.first = -1;
+            }
+            else
+            {
+                int novoFirst = l[p].lista.next;
+                l[novoFirst].lista.prev = -1;
+            }
+        }
+
+        else if (l[p].lista.next != -1) // verifica se o item removido está no meio da lista
+        {
+        }
+
+        else // item removido é o ultimo da lista
+        {
+        }
+    }
+
+    cout << "Chave não encontrada!";
 }
 
 void imprimeRegistros(celula *l)
