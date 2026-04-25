@@ -131,6 +131,13 @@ dados remove(celula *l, int chave)
             l[0].cabecalho.last = l[p].lista.prev;
             l[l[p].lista.prev].lista.next = -1;
         }
+
+        // Correção do free e retorando dado removido
+
+        l[p].lista.next = l[0].cabecalho.free;
+        l[0].cabecalho.free = p;
+
+        return dadoRemovido;
     }
 
     cout << "Chave não encontrada!";
