@@ -7,6 +7,7 @@ Implementar no código abaixo:
 5 - Pesquisa
 6 - Insere ordenado pela chave
 */
+//feijão com farinha e linguiça
 
 #include <iostream>
 
