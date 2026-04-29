@@ -240,7 +240,67 @@ dados pesquisa(celula *l, int chave)
 
 void insereOrdenado(celula *l, dados d)
 {
-    //[FAZER]
+    int prox, ant;
+    int dado = d.chave;
+    int x = l[0].cabecalho.first;
+
+    cout << endl
+         << endl
+         << "Inserindo registros ordenadamente" << endl;
+
+    //Verifica se a lista está cheia
+    if (l[0].cabecalho.free == -1)
+    {
+        cout << "Lista cheia!!!";
+        return;
+    }
+
+    //Verifica se a lista está vazia. Nesse caso, apenas chama a função insere
+    if(l[0].cabecalho.quant == 0){
+        insere(l,d);
+        return;
+    }
+
+    prox = l[0].cabecalho.free;
+
+    //Laço que perdura enquanto não chegar ao final da lista
+    for (; x != -1;){
+        if(dado < l[x].lista.reg.chave){
+            // atribuindo ao registro o valor de d
+            l[prox].lista.reg = d;
+
+             //Atualizando o free
+            l[0].cabecalho.free = l[prox].lista.next;
+
+            // adicionando em quant
+            l[0].cabecalho.quant++;
+
+            ant = l[x].lista.prev;
+            
+            l[prox].lista.next = x;
+            l[x].lista.prev = prox;
+            
+            l[prox].lista.prev = ant;
+
+            if(ant != -1){
+                l[ant].lista.next = prox;
+            }else{
+                l[0].cabecalho.first = prox;
+            }
+
+            return;
+        }
+        //Para caso o valor já esteja na lista
+        else if(dado == l[x].lista.reg.chave){
+            cout << "Valor já está na lista!";
+            return;
+        }
+        //Pula para o próximo item da lista
+        else{
+            x = l[x].lista.next;
+        }
+    }
+    insere(l,d);
 }
 
 int main()
