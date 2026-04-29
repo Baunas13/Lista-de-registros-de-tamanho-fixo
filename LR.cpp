@@ -345,14 +345,14 @@ int main()
             cout << "Digite a chave a ser removida: ";
             cin >> d.chave;
             d = remove(lista, d.chave);
-            //[FAZER]-> imprimir as informações do registro d
+            if(d.chave != -1) cout << "Valor removido: " << d.chave;
             break;
 
         case 3:
             cout << "Digite a chave a ser pesquisada: ";
             cin >> d.chave;
             d = pesquisa(lista, d.chave);
-            //[FAZER]->imprimir as informações do registro d
+            if(d.chave != -1) cout << "\nValor encontrado: " << d.chave;
             break;
 
         case 4:
