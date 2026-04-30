@@ -7,7 +7,7 @@ Implementar no código abaixo:
 5 - Pesquisa
 6 - Insere ordenado pela chave
 */
-//feijão com farinha e linguiça
+// feijão com farinha e linguiça
 
 #include <iostream>
 
@@ -216,6 +216,7 @@ dados pesquisa(celula *l, int chave)
 {
 
     int p = l[0].cabecalho.first;
+    // Tratamento caso o item não exista na Lista
     dados dadoVazio;
     dadoVazio.chave = -1;
 
@@ -225,16 +226,17 @@ dados pesquisa(celula *l, int chave)
         return dadoVazio;
     }
 
+    // Percorre os itens da lista até o final
     for (; p != -1; p = l[p].lista.next)
     {
         if (l[p].lista.reg.chave == chave)
         {
             cout << "Chave encontrada!";
-            return l[p].lista.reg;
+            return l[p].lista.reg; // Retorno do item encontrado
         }
     }
 
-    cout << "Registro nao encontrado!" << endl;
+    cout << "Registro nao encontrado!" << endl; // Retorno do item inexistente
     return dadoVazio;
 }
 
@@ -248,59 +250,67 @@ void insereOrdenado(celula *l, dados d)
          << endl
          << "Inserindo registros ordenadamente" << endl;
 
-    //Verifica se a lista está cheia
+    // Verifica se a lista está cheia
     if (l[0].cabecalho.free == -1)
     {
         cout << "Lista cheia!!!";
         return;
     }
 
-    //Verifica se a lista está vazia. Nesse caso, apenas chama a função insere
-    if(l[0].cabecalho.quant == 0){
-        insere(l,d);
+    // Verifica se a lista está vazia. Nesse caso, apenas chama a função insere
+    if (l[0].cabecalho.quant == 0)
+    {
+        insere(l, d);
         return;
     }
 
     prox = l[0].cabecalho.free;
 
-    //Laço que perdura enquanto não chegar ao final da lista
-    for (; x != -1;){
-        if(dado < l[x].lista.reg.chave){
+    // Laço que perdura enquanto não chegar ao final da lista
+    for (; x != -1;)
+    {
+        if (dado < l[x].lista.reg.chave)
+        {
             // atribuindo ao registro o valor de d
             l[prox].lista.reg = d;
 
-             //Atualizando o free
+            // Atualizando o free
             l[0].cabecalho.free = l[prox].lista.next;
 
             // adicionando em quant
             l[0].cabecalho.quant++;
 
             ant = l[x].lista.prev;
-            
+
             l[prox].lista.next = x;
             l[x].lista.prev = prox;
-            
+
             l[prox].lista.prev = ant;
 
-            if(ant != -1){
+            if (ant != -1)
+            {
                 l[ant].lista.next = prox;
-            }else{
+            }
+            else
+            {
                 l[0].cabecalho.first = prox;
             }
 
             return;
         }
-        //Para caso o valor já esteja na lista
-        else if(dado == l[x].lista.reg.chave){
+        // Para caso o valor já esteja na lista
+        else if (dado == l[x].lista.reg.chave)
+        {
             cout << "Valor já está na lista!";
             return;
         }
-        //Pula para o próximo item da lista
-        else{
+        // Pula para o próximo item da lista
+        else
+        {
             x = l[x].lista.next;
         }
     }
-    insere(l,d);
+    insere(l, d);
 }
 
 int main()
@@ -345,14 +355,16 @@ int main()
             cout << "Digite a chave a ser removida: ";
             cin >> d.chave;
             d = remove(lista, d.chave);
-            if(d.chave != -1) cout << "Valor removido: " << d.chave;
+            if (d.chave != -1)
+                cout << "Valor removido: " << d.chave;
             break;
 
         case 3:
             cout << "Digite a chave a ser pesquisada: ";
             cin >> d.chave;
             d = pesquisa(lista, d.chave);
-            if(d.chave != -1) cout << "\nValor encontrado: " << d.chave;
+            if (d.chave != -1)
+                cout << "\nValor encontrado: " << d.chave;
             break;
 
         case 4:
