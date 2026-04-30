@@ -10,7 +10,7 @@ O programa é executado através de um menu interativo que oferece as seguintes 
 
 * **Criação da Lista:** Inicializa o sistema solicitando o número de registros `n` e criando a estrutura base com cabeçalho
 * **Inserção Padrão:** Insere o registro utilizando o primeiro espaço vazio disponível e o posiciona no final lógico da lista.
-* **Inserção Ordenada:** Insere o registro mantendo a lista logicamente ordenada através da sua chave. Esta operação manipula apenas os ponteiros lógicos `FIRST`, `LAST`, `NEXT` e `PREV`, pois os registros não podem ser deslocados fisicamente na memória após alocados 16].
+* **Inserção Ordenada:** Insere o registro mantendo a lista logicamente ordenada através da sua chave. Esta operação manipula apenas os ponteiros lógicos `FIRST`, `LAST`, `NEXT` e `PREV`, pois os registros não podem ser deslocados fisicamente na memória após alocados.
 * **Remoção:** Remove registros buscando através de sua chave e libera a posição no encadeamento.
 * **Pesquisa:** Busca e retorna registros através de sua chave.
 * **Impressão (Percuso Lógico):** Imprime as informações do cabeçalho e os registros navegando partindo do `FIRST` e seguindo sequencialmente os ponteiros `NEXT` até atingir o `LAST`.
